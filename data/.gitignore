@@ -1,7 +1,12 @@
-# .gitignore
+# data/.gitignore
 
-# ignore secret environment variable values in the ".env" file:
-.env
+# h/t: https://stackoverflow.com/a/5581995/670433
+
+# ignore all files in this directory:
+*
+
+# except this gitignore file:
+!.gitignore
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

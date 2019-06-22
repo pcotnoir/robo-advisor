@@ -22,12 +22,16 @@ last_refreshed = parsed_response["Meta Data"]["3. Last Refreshed"]
 latest_close = time_series[last_day]["4. close"]
 
 large_prices = []
+small_prices = []
 
 for chosen_date in date:
     large_price = time_series[chosen_date]["2. high"]
     large_prices.append(float(large_price))
+    small_price = time_series[chosen_date]["3. low"]
+    small_prices.append(float(small_price))
 
 latest_high = max(large_prices)
+latest_low = min(small_prices)
 
 #breakpoint()
 
@@ -42,7 +46,7 @@ print("-------------------------")
 print(f"LATEST DAY: {last_refreshed}")
 print(f"LATEST CLOSE: {moneyformat(float(latest_close))}")
 print(f"RECENT HIGH: {moneyformat(float(latest_high))}")
-print("RECENT LOW: $99,000.00")
+print(f"RECENT LOW: {moneyformat(float(latest_low))}")
 print("-------------------------")
 print("RECOMMENDATION: BUY!")
 print("RECOMMENDATION REASON: TODO")

@@ -10,7 +10,7 @@ import os
 from dotenv import load_dotenv
 load_dotenv()
 
-#functions
+#function
 
 def moneyformat(price):
     return '${:,.2f}'.format(price) 

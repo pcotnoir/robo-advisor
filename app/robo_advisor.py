@@ -14,20 +14,39 @@ load_dotenv()
 def moneyformat(price):
     return '${:,.2f}'.format(price) 
 
-#URLs
-api_key = os.environ.get("ALPHAVANTAGE_API_KEY")
+    #URLs: adapted from https://stackoverflow.com/questions/23294658/asking-the-user-for-input-until-they-give-a-valid-response
 while True:
-    stock_symbol = input("Please input the stock ticker you would like information on: ")
-    if not stock_symbol.isalpha():
+    try:
+        api_key = os.environ.get("ALPHAVANTAGE_API_KEY")
+        stock_symbol = input("Please input the stock ticker you would like information on: ")
+        url = f"https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol={stock_symbol}&apikey={api_key}"
+        user_input = requests.get(url)
+        parsed_response = json.loads(user_input.text)
+        last_refreshed = parsed_response["Meta Data"]["3. Last Refreshed"]
+    except KeyError:
         print("You entered the ticker incorrectly. Please try again: ")
+        continue
     else:
-        user_input = requests.get("https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol={stock_symbol}&apikey={api_key}")
+        break
 
+   # api_key = os.environ.get("ALPHAVANTAGE_API_KEY")
+   # while True:
+   #     stock_symbol = input("Please input the stock ticker you would like information on: ")
+   #     if not stock_symbol.isalpha():
+   #         print("You entered the ticker incorrectly. Please try again: ")
+   #     else:
+   #         url = f"https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol={stock_symbol}&apikey={api_key}"
+   #         user_input = requests.get(url)
+   #         #user_input = requests.get("https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol={stock_symbol}&apikey={api_key}")
+   #         if "Error" in user_input.text:
+   #             print("You entered the ticker incorrectly. Please try again: ")
+   #         else:
+   #             break
 
 #stock_symbol = "MSFT" #TO DO: accept user input
 
-url = f"https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol={stock_symbol}&apikey={api_key}"
-response = requests.get(url)
+#url = f"https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol={stock_symbol}&apikey={api_key}"
+#response = requests.get(url)
 
 #print(response.status_code) #> 200
 #print(type(response)) #> <class 'requests.models.Response'>
@@ -35,7 +54,7 @@ response = requests.get(url)
 
 #Info Inputs
 
-parsed_response = json.loads(response.text)
+parsed_response = json.loads(user_input.text)
 time_series = parsed_response["Time Series (Daily)"]
 date = list(time_series.keys())
 last_day = date[0]

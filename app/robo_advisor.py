@@ -6,6 +6,8 @@ import requests
 import json
 import csv
 import os
+from dotenv import load_dotenv
+load_dotenv()
 
 #functions
 
@@ -13,7 +15,10 @@ def moneyformat(price):
     return '${:,.2f}'.format(price) 
 
 #URLs
-url = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=MSFT&apikey=demo"
+api_key = os.environ.get("ALPHAVANTAGE_API_KEY")
+stock_symbol = "MSFT" #TO DO: accept user input
+
+url = f"https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol={stock_symbol}&apikey={api_key}"
 response = requests.get(url)
 
 #print(response.status_code) #> 200

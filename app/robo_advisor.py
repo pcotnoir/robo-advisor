@@ -2,6 +2,7 @@
 
 #imports
 
+import time
 import requests
 import json
 import csv
@@ -100,7 +101,7 @@ print("-------------------------")
 print("SELECTED SYMBOL: XYZ")
 print("-------------------------")
 print("REQUESTING STOCK MARKET DATA...")
-print("REQUEST AT: 2018-02-20 02:00pm") #DO ON OWN
+print("REQUEST AT: ", time.strftime("%Y-%m-%d"), time.strftime("%H:%M:%S"))
 print("-------------------------")
 print(f"LATEST DAY: {last_refreshed}")
 print(f"LATEST CLOSE: {moneyformat(float(latest_close))}")

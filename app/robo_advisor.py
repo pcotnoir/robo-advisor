@@ -16,7 +16,15 @@ def moneyformat(price):
 
 #URLs
 api_key = os.environ.get("ALPHAVANTAGE_API_KEY")
-stock_symbol = "MSFT" #TO DO: accept user input
+while True:
+    stock_symbol = input("Please input the stock ticker you would like information on: ")
+    if not stock_symbol.isalpha():
+        print("You entered the ticker incorrectly. Please try again: ")
+    else:
+        user_input = requests.get("https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol={stock_symbol}&apikey={api_key}")
+
+
+#stock_symbol = "MSFT" #TO DO: accept user input
 
 url = f"https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol={stock_symbol}&apikey={api_key}"
 response = requests.get(url)

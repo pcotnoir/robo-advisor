@@ -128,8 +128,16 @@ print(f"LATEST CLOSE: {moneyformat(float(latest_close))}")
 print(f"RECENT HIGH: {moneyformat(float(latest_high))}")
 print(f"RECENT LOW: {moneyformat(float(latest_low))}")
 print("-------------------------")
-print("RECOMMENDATION: BUY!") #if statements required
-print("RECOMMENDATION REASON: TODO") #TO DO
+
+potential_buy = 1.15*float(latest_low)
+
+if potential_buy > float(latest_close):
+    print("RECOMMENDATION: BUY!")
+    print("RECOMMENDATION REASON: The latest closing price is less than '15%' of the recent low.")
+else:
+    print("DO NOT BUY!")
+    print("RECOMMENDATION REASON: The latest closing price is greater than '15%' of the recent low.")
+
 print("-------------------------")
 print(f"WRITING DATA TO CSV: {csv_file_path}...")
 print("-------------------------")

@@ -47,9 +47,36 @@ conda activate stocks-env
 ```
 pip install -r requirements.txt
 pip install pytest # (only if you'll be writing tests)
+pip install requests
 ```
 11. Practice running the Python script by entering the below in the GitBash command-line:
 ```
-python robo_advisor.py
+python app/robo_advisor.py
 ```
 12. Confirm that the example output is displayed in GitBash once the robo_advisor.py script has run.
+
+13. Obtain an AlphaVantage API Key (e.g. "abc123") to add security to your program. Unique keys can be obtained at: https://www.alphavantage.co/support/#api-key .
+
+14. With your API Key, update the contents of the ".env" file with your API Key credentials. Your code should be something like:
+```
+ALPHAVANTAGE_API_KEY="abc123"
+```
+where "abc123" is your unique key.
+
+15. Ensure that your project repository contains the following .gitignore code:
+```
+# .gitignore
+# ignore secret environment variable values in the ".env" file:
+.env
+```
+16. Ensure that your project repository contains the following .gitignore file within the "data" directory:
+```
+# data/.gitignore
+# h/t: https://stackoverflow.com/a/5581995/670433
+# ignore all files in this directory:
+*
+
+# except this gitignore file:
+!.gitignore
+```
+

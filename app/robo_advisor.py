@@ -98,7 +98,7 @@ with open(csv_file_path, "w") as csv_file: # "w" means "open the file for writin
             })
 
 print("-------------------------")
-print("SELECTED SYMBOL: XYZ")
+print("SELECTED SYMBOL:", stock_symbol)
 print("-------------------------")
 print("REQUESTING STOCK MARKET DATA...")
 print("REQUEST AT: ", time.strftime("%Y-%m-%d"), time.strftime("%H:%M:%S"))

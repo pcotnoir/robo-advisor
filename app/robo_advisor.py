@@ -16,6 +16,21 @@ def moneyformat(price):
     return '${:,.2f}'.format(price) 
 
     #URLs: adapted from https://stackoverflow.com/questions/23294658/asking-the-user-for-input-until-they-give-a-valid-response
+# while True:
+#     try:
+#         api_key = os.environ.get("ALPHAVANTAGE_API_KEY")
+#         stock_symbol = input("Please input the stock ticker you would like information on: ")
+#         url = f"https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol={stock_symbol}&apikey={api_key}"
+#         user_input = requests.get(url)
+#         parsed_response = json.loads(user_input.text)
+#         last_refreshed = parsed_response["Meta Data"]["3. Last Refreshed"]
+#     except KeyError:
+#         print("You entered the ticker incorrectly. Expecting a properly-formed stock symbol like 'MSFT'. Please try again: ")
+#         continue
+#     else:
+#         break
+
+
 while True:
     try:
         api_key = os.environ.get("ALPHAVANTAGE_API_KEY")
@@ -25,10 +40,15 @@ while True:
         parsed_response = json.loads(user_input.text)
         last_refreshed = parsed_response["Meta Data"]["3. Last Refreshed"]
     except KeyError:
-        print("You entered the ticker incorrectly. Please try again: ")
-        continue
+            if len(stock_symbol) >=5:
+                print("You entered the ticker incorrectly with too many characters. Expecting a properly-formed stock symbol like 'MSFT'. Please try again: ")
+                continue
+            elif not stock_symbol.isalpha():
+                print("You entered the ticker incorrectly with a number. Expecting a properly-formed stock symbol like 'MSFT'. Please try again: ")
+                continue
     else:
         break
+
 
    # api_key = os.environ.get("ALPHAVANTAGE_API_KEY")
    # while True:
@@ -109,7 +129,7 @@ print(f"RECENT HIGH: {moneyformat(float(latest_high))}")
 print(f"RECENT LOW: {moneyformat(float(latest_low))}")
 print("-------------------------")
 print("RECOMMENDATION: BUY!") #if statements required
-print("RECOMMENDATION REASON: TODO")
+print("RECOMMENDATION REASON: TODO") #TO DO
 print("-------------------------")
 print(f"WRITING DATA TO CSV: {csv_file_path}...")
 print("-------------------------")

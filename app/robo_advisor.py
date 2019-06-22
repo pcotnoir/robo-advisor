@@ -53,23 +53,16 @@ with open(csv_file_path, "w") as csv_file: # "w" means "open the file for writin
     writer = csv.DictWriter(csv_file, fieldnames=csv_headers)
     writer.writeheader() # uses fieldnames set above
     
-    #looping
-    writer.writerow({
-        "timestamp": "TODO", 
-        "open": "TODO", 
-        "high": "TODO", 
-        "low": "TODO", 
-        "close": "TODO", 
-        "volume": "TODO" 
-        })
-    writer.writerow({
-        "timestamp": "TODO", 
-        "open": "TODO", 
-        "high": "TODO", 
-        "low": "TODO", 
-        "close": "TODO", 
-        "volume": "TODO" 
-        })
+    for chosen_date in date:
+        everyday_prices = time_series[chosen_date]
+        writer.writerow({
+            "timestamp": chosen_date, 
+            "open": everyday_prices["1. open"], 
+            "high": everyday_prices["2. high"], 
+            "low": everyday_prices["3. low"], 
+            "close": everyday_prices["4. close"], 
+            "volume": everyday_prices["5. volume"] 
+            })
 
 print("-------------------------")
 print("SELECTED SYMBOL: XYZ")
